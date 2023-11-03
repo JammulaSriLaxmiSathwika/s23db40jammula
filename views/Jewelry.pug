@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    h1= title
+    -
+        var Jewelry = [
+            { "type": "Necklace", "material": "Gold", "price": 2000 },
+            { "type": "Ring", "material": "Diamond", "price": 4000 },
+            { "type": "Chain", "material": "Platinum", "price": 1500 }
+        ]
+
+    div(class="container-fluid")
+        div(class="row")
+            each item, index in Jewelry
+                div(class="col-sm-2", onclick=`buy(${index})`)
+                    | #{item.type}, #{item.material}, #{item.price}$
+                    script.
+                        function buy(a) {
+                            alert(`You purchased Item ${a + 1}`);
+                        }
+
+
+
+
