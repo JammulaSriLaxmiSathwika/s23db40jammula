@@ -2,7 +2,34 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var Jewelry = require("./models/Jewelry");
 var logger = require('morgan');
+require('dotenv').config();
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString);
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+// We can seed the collection if needed onserver start
+async function recreateDB(){
+// Delete everything
+await Jewelry.deleteMany();
+let instance1 = new
+Jewelry({type:"Chain", material:'Gold',
+price:1000});
+instance1.save().then(doc=>{
+console.log("First object saved")}
+).catch(err=>{
+console.error(err)
+});
+}
+let reseed = true;
+if (reseed) {recreateDB();}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
