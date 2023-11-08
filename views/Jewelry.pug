@@ -11,7 +11,7 @@ block content
 
     div(class="container-fluid")
         div(class="row")
-            each item, index in Jewelry
+            each item, index in results
                 div(class="col-sm-2", onclick=`buy(${index})`)
                     | #{item.type}, #{item.material}, #{item.price}$
                     script.
