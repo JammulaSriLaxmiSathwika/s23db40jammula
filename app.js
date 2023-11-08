@@ -36,6 +36,7 @@ var usersRouter = require('./routes/users');
 var JewelryRouter = require('./routes/Jewelry');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -55,6 +56,7 @@ app.use('/users', usersRouter);
 app.use('/Jewelry', JewelryRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/resource', resourceRouter);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
