@@ -19,9 +19,11 @@ console.log("Connection to DB succeeded")});
 async function recreateDB(){
 // Delete everything
 await Jewelry.deleteMany();
-let instance1 = new
-Jewelry({type:"Chain", material:'Gold',
-price:1000});
+let instance1 = new Jewelry({type:"Chain", material:'Gold',price:2000});
+let instance2 = new Jewelry({type:"Ring", material:'Diamond',price:3000});
+let instance3 = new Jewelry({type:"Bangle", material:'silver',price:1000});
+instance2.save();
+instance3.save();
 instance1.save().then(doc=>{
 console.log("First object saved")}
 ).catch(err=>{
