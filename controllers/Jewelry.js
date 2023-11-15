@@ -2,8 +2,8 @@ var Jewelry = require('../models/Jewelry');
 // List of all Jewelry
 exports.Jewelry_list =  async function(req, res) {
     try{
-    theCostumes = await Jewelry.find();
-    res.send(theCostumes);
+    thejewelrys = await Jewelry.find();
+    res.send(thejewelrys);
     }
     catch(err){
     res.status(500);
@@ -14,8 +14,8 @@ exports.Jewelry_list =  async function(req, res) {
 // Handle a show all view
 exports.Jewelry_view_all_Page = async function(req, res) {
     try{
-    theCostumes = await Jewelry.find();
-    res.render('Jewelry', { title: 'Jewelry Search Results', results: theCostumes });
+    thejewelrys = await Jewelry.find();
+    res.render('Jewelry', { title: 'Jewelry Search Results', results: thejewelrys });
     }
     catch(err){
     res.status(500);
@@ -41,7 +41,7 @@ exports.Jewelry_create_post = async function(req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costume_type":"goat", "cost":12, "size":"large"}
+    // {"jewelry_type":"goat", "cost":12, "size":"large"}
     document.type = req.body.type;
     document.material = req.body.material;
     document.price = req.body.price;
@@ -65,10 +65,10 @@ exports.Jewelry_update_put =  async function(req, res) {
     try {
     let toUpdate = await Jewelry.findById( req.params.id)
     // Do updates of properties
-    if(req.body.Jewelry_type)
-    toUpdate.Jewelry_type = req.body.Jewelry_type;
-    if(req.body.cost) toUpdate.cost = req.body.cost;
-    if(req.body.size) toUpdate.size = req.body.size;
+    if(req.body.type)
+    toUpdate.type = req.body.type;
+    if(req.body.price) toUpdate.price = req.body.price;
+    if(req.body.material) toUpdate.material = req.body.material;
     let result = await toUpdate.save();
     console.log("Sucess " + result)
     res.send(result)
@@ -78,3 +78,16 @@ exports.Jewelry_update_put =  async function(req, res) {
     failed`);
     }
     };
+    // Handle Jewelry delete on DELETE.
+exports.Jewelry_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Jewelry.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+    
