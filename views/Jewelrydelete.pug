@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  h1= title
+  if toShow == null
+    h2 No instance to delete
+  else
+    - let Jewelryid = toShow._id
+    - let Jewelry_type = toShow.Jewelry_type
+    - let Jewelrycost = toShow.cost
+    - let Jewelrysize = toShow.size
+    - let actionid = "/resource/Jewelry/" + Jewelryid
+    script.
+      let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='JewelryAttr mr-3') Jewelry ID is:
+        div #{Jewelryid}
+      div.row
+        div(class='JewelryAttr mr-3') Jewelry Type is:
+        div #{type}
+      div.row
+        div(class='JewelryAttr mr-3') Jewelry material is:
+        div #{material}
+      div.row
+        div(class='JewelryAttr mr-3') Jewelry price is:
+        div #{price}
+      button(class="btn btn-danger m-2", onclick="deleteOnid()") Delete
+      button(class="btn btn-secondary m-2", onclick="cancel()") Cancel
+    script.
+      function cancel() {
+        // Go back to the home page for the Jewelry collection
+        window.location.href='/Jewelrys'
+      }
+    script.
+      function deleteOnid() {
+        console.log("starting delete");
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded");
+          window.location.href='/Jewelrys';
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error);
+        });
+      }
