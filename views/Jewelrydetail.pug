@@ -1,20 +1,46 @@
 extends layout
+
 block content
   h1= title
   - let Jewelryid = toShow._id
   - let type = toShow.type
   - let price = toShow.price
   - let material = toShow.material
-  div
-    div.row
-      div(class='JewelryAttr mr-3') Jewelry ID is:
-      div #{Jewelryid}
-    div.row
-      div(class='JewelryAttr mr-3') Jewelry Type is:
-      div #{type}
-    div.row
-      div(class='JewelryAttr mr-3') Jewelry material is:
-      div #{material}
-    div.row
-      div(class='JewelryAttr mr-3') Jewelry price is:
-      div #{price}
+  .container.mt-4
+    .jumbotron
+      h3 Displaying Jewelry Details
+    .row.mt-4
+      .col-md-6
+        .card
+          .card-header.bg-primary.text-white Jewelry Information
+          .card-body
+            .row
+              .col-6
+                p(class='JewelryAttr mb-2') Jewelry ID:
+                p #{Jewelryid}
+              .col-6
+                p(class='JewelryAttr mb-2') Jewelry Type:
+                p #{type}
+            .row
+              .col-6
+                p(class='JewelryAttr mb-2') Jewelry Material:
+                p #{material}
+              .col-6
+                p(class='JewelryAttr mb-2') Jewelry Price:
+                p #{price}
+
+      .col-md-6
+        .card
+          .card-header.bg-info.text-white Update Jewelry
+          .card-body
+            form(id='JewelryForm', action='/updateJewelry', method='POST')
+              .form-group
+                label.JewelryAttr(for='type') Jewelry Type
+                input#type.form-control(type='text', name='type', value=type)
+              .form-group
+                label.JewelryAttr(for='material') Jewelry Material
+                input#material.form-control(type='text', name='material', value=material)
+              .form-group
+                label.JewelryAttr(for='price') Jewelry Price
+                input#price.form-control(type='number', name='price', value=price)
+              button.btn.btn-success(type='submit') Update
