@@ -86,7 +86,6 @@ passport.use(new LocalStrategy(
     passport.serializeUser(Account.serializeUser());
     passport.deserializeUser(Account.deserializeUser());
         
-    
 
 // Routes setup
 app.use('/', indexRouter);
