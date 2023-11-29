@@ -16,5 +16,5 @@ router.get('/create', secured, Jewelry_controlers.Jewelry_create_Page);
 /* GET create update page */
 router.get('/update',secured, Jewelry_controlers.Jewelry_update_Page);
 /* GET delete Jewelry page */
-router.get('/delete', Jewelry_controlers.Jewelry_delete_Page);
+router.get('/delete', secured,Jewelry_controlers.Jewelry_delete_Page);
 module.exports = router;
