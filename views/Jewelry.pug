@@ -28,6 +28,7 @@ block content
       { "type": "Ring", "material": "Diamond", "price": 4000 },
       { "type": "Chain", "material": "Platinum", "price": 1500 }
     ]
+  a(class="btn btn-success" href="/recipe/create") Create
 
   style.
     body {
@@ -71,9 +72,11 @@ block content
         .col-sm-4.mb-4
           div(class="col-sm-2", onclick=`buy(${index})`)
             | #{item.type}, #{item.material}, #{item.price}$
-            - let destination = `dispatch(\"/costumes/update?id=${item._id}\")`
+            - let destination = `dispatch(\"/Jewelry/update?id=${item._id}\")`
               div(class="row-sm-2", class="m-1") Item #{item.costume_type}(#{item.size}) is #{item.cost}
               button.btn( class="btn-primary ml-1", onclick= destination) Update
+              a(class="btn btn-danger" href=`/Jewelry/delete?id=${item._id}`) Delete
+              a(class="btn btn-dark" href=`/Jewelry/detail?id=${item._id}`) Details
             script.
               function buy(a) {
                   alert(`You purchased Item ${a + 1}`);
